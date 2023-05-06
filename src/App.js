@@ -1,13 +1,18 @@
 import React from 'react';
 import Search from "./pages/Search/Search";
 import Favorites from "./pages/Favorites/Favorites";
+import {Route, Routes} from 'react-router-dom'
+import Layout from "./features/Layout/Layout";
+
 
 function App() {
     return (
-        <div className="App">
-            <Search/>
-            <Favorites />
-        </div>
+        <Layout>
+            <Routes>
+                <Route path="/" element={<Search/>}/>
+                <Route path="/favorites" element={<Favorites/>}/>
+            </Routes>
+        </Layout>
     );
 }
 
