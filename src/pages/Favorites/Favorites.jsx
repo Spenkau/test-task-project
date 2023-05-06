@@ -1,10 +1,13 @@
 import React from 'react';
+import Vacancy from "../../components/Vacancy/Vacancy";
 
 const Favorites = () => {
     return (
-        <div>
-            
-        </div>
+        <main>
+            <ul className="favorites">
+                <Vacancy />
+            </ul>
+        </main>
     );
 };
 

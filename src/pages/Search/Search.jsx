@@ -1,5 +1,6 @@
 import React from 'react';
 import {Select} from "@mantine/core";
+import Vacancy from "../../components/Vacancy/Vacancy";
 
 const Search = () => {
     return (
@@ -26,12 +27,10 @@ const Search = () => {
                             <p>Оклад</p>
                             <Select
                                 data={['10', '20', '50', '100', '150', '200', '250', '300', '350', '400', '450', '500', '600', '700', '800', '900', '1000']}
-                                // label="Оклад"
                                 placeholder="От"
                                 style={{width: "275px"}} />
                             <Select
                                 placeholder="До"
-                                // dropdownPosition="bottom"
                                 style={{width: "275px", margin: "8px 0 20px 0"}}
                                 data={['10', '20', '50', '100', '150', '200', '250', '300', '350', '400', '450', '500', '600', '700', '800', '900', '1000']} />
                         </li>
@@ -47,25 +46,11 @@ const Search = () => {
                         <button className="btn-blue">Поиск</button>
                     </form>
                     <ul className="vacancy-list">
-                        <li className="vacancy">
-                            <p className="profession">/Менеджер-дизайнер</p>
-                            <p className="extra-info">
-                                <span>з/п от 70000 rub</span>
-                                &nbsp;&nbsp;&#8226;&nbsp;&nbsp;
-                                Полный рабочий день
-                            </p>
-                            <div className="location-container">
-                                <img src="/images/location.png" alt="location"/>
-                                <p className="location-name">Новый Уренгой</p>
-                            </div>
-                            <button className="favorite">
-                                <img src="/images/favorite.png" alt="handle favorite"/>
-                            </button>
-                        </li>
+                        <Vacancy />
                     </ul>
                 </div>
             </main>
-            {/*<footer></footer>*/}
+            <footer></footer>
         </>
     );
 };

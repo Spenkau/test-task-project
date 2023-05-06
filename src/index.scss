@@ -17,43 +17,9 @@ header {
 
 li { list-style-type: none }
 
-header {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 84px;
-  //margin-bottom: 40px;
-}
-
-.logo {
-  position: absolute;
-  left: 0;
-  display: flex;
-  span {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 24px;
-    letter-spacing: -0.02em;
-    color: #232134;
-    margin-left: 12px;
-  }
-}
-
-.pages {
-  display: flex;
-  gap: 60px;
-
-  li {
-    font-weight: 500;
-    font-size: 16px;
-  }
-}
-
 main {
   display: flex;
-  height: 90vh;
+  height: 100vh;
   background-color: #F7F7F8;
   padding: 40px 162px 0 162px;
 }
@@ -113,19 +79,16 @@ main {
   button {
     width: 100%;
     height: 40px;
-
   }
 }
 
 .main-content {
   width: 100%;
   height: 660px;
-  //background-color: #FFFFFF;
 }
 
 .search {
   display: flex;
-  //justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 48px;
@@ -152,45 +115,14 @@ main {
   }
 }
 
-.vacancy-list {
+.vacancy-list, .favorites {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.vacancy {
-  position: relative;
-  background-color: #FFFFFF;
-  padding: 24px;
 
-  .favorite {
-    position: absolute;
-    right: 24px;
-    top: 24px;
-    background-color: transparent;
-  }
-}
 
-.profession {
-  font-weight: 600;
-  font-size: 20px;
-  color: #5E96FC;
-  margin-bottom: 12px;
-}
 
-.extra-info {
-  font-size: 16px;
-  color: #232134;
-  margin: 12px 0;
 
-  span {
-    font-weight: 600;
-    font-size: 16px;
-  }
-}
-
-.location-container {
-  display: flex;
-  font-size: 16px;
-  img { margin-right: 12px }
-}
