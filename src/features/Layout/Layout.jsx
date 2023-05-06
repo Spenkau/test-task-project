@@ -5,7 +5,7 @@ function Layout(props) {
         <>
             <header>
                 <div className="logo">
-                    <img src="/images/Union.png" alt="logo"/>
+                    <img src="/images/Union.png" width={30} height={30} alt="logo"/>
                     <span>Jobored</span>
                 </div>
                 <nav>
