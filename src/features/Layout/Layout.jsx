@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './layout.module.scss';
-import {Link, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 function Layout(props) {
     return (
@@ -13,20 +13,14 @@ function Layout(props) {
                 <nav>
                     <ul className={styles.pages}>
                         <li>
-                            <Link
+                            <NavLink
                                 to="/"
-                                className={styles.customLink}
-                            >
-                                Поиск вакансий
-                            </Link>
+                                className={styles.customLink}>Поиск вакансий</NavLink>
                         </li>
                         <li>
-                            <Link
+                            <NavLink
                                 to="/favorites"
-                                className={styles.customLink}
-                            >
-                                Избранное
-                            </Link>
+                                className={styles.customLink}>Избранное</NavLink>
                         </li>
                     </ul>
                 </nav>
