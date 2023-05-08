@@ -1,8 +1,26 @@
-import React from 'react';
-import {Select} from "@mantine/core";
+import React, {useState} from 'react';
+import {NumberInput, Select} from "@mantine/core";
 import Vacancy from "../../components/Vacancy/Vacancy";
+import axios from "axios";
+
+// ПАГИНАЦИЯ, ФИЛЬТР, ПОИСК
+
 
 const Search = () => {
+    const [vacancies, setVacancies] = useState([]);
+
+    axios.get('https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/', {
+        headers: {
+            'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
+            'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
+        }
+    }).then(response => {
+        setVacancies(response.data.objects);
+    }).catch(error => {
+        console.error(error);
+    });
+
+    console.log(vacancies)
     return (
         <>
             <main>
@@ -25,14 +43,16 @@ const Search = () => {
                         </li>
                         <li className="salary">
                             <p>Оклад</p>
-                            <Select
-                                data={['10', '20', '50', '100', '150', '200', '250', '300', '350', '400', '450', '500', '600', '700', '800', '900', '1000']}
+                            <NumberInput
+                                min={0}
+                                step={5000}
                                 placeholder="От"
                                 style={{width: "275px"}} />
-                            <Select
+                            <NumberInput
+                                min={0}
+                                step={5000}
                                 placeholder="До"
-                                style={{width: "275px", margin: "8px 0 20px 0"}}
-                                data={['10', '20', '50', '100', '150', '200', '250', '300', '350', '400', '450', '500', '600', '700', '800', '900', '1000']} />
+                                style={{width: "275px", margin: "8px 0 20px 0"}} />
                         </li>
                     </ul>
                     <div className="filters-bottom">
@@ -46,7 +66,18 @@ const Search = () => {
                         <button className="btn-blue">Поиск</button>
                     </form>
                     <ul className="vacancy-list">
-                        <Vacancy />
+                        {
+                            vacancies.map((vac, index) =>
+                                <Vacancy
+                                    key={index}
+                                    profession={vac.profession}
+                                    firm_name={vac.firm_name}
+                                    type_of_work={vac.type_of_work.title}
+                                    payment_from={vac.payment_from}
+                                    town_title={vac.town.title}
+                                />
+                            )
+                        }
                     </ul>
                 </div>
             </main>

@@ -1,21 +1,25 @@
 import React from 'react';
 import styles from './vacancy.module.scss'
+import {CiStar} from "react-icons/ci";
+import {HiOutlineLocationMarker } from "react-icons/hi";
 
-const Vacancy = () => {
+const Vacancy = ({profession, payment_from, type_of_work, town_title}) => {
     return (
         <li className={styles.vacancy}>
-            <p className={styles.profession}>/Менеджер-дизайнер</p>
+            <p className={styles.profession}>{profession}</p>
             <p className={styles.extraInfo}>
-                <span>з/п от 70000 rub</span>
+                <span>з/п от {payment_from} rub</span>
                 &nbsp;&nbsp;&#8226;&nbsp;&nbsp;
-                Полный рабочий день
+                {type_of_work}
             </p>
             <div className={styles.locationContainer}>
-                <img src="/images/location.png" alt="location"/>
-                <p>Новый Уренгой</p>
+                <HiOutlineLocationMarker style={{width: "20px", height: "20px", opacity: "0.4", marginRight: "12px"}} />
+                <p>{town_title}</p>
             </div>
             <button className={styles.favorite}>
-                <img src="/images/favorite.png" alt="handle favorite"/>
+                <CiStar
+                    style={{width: "30px", height: "30px"}}
+                />
             </button>
         </li>
     );
