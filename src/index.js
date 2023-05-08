@@ -1,6 +1,5 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
-import {Provider} from 'react-redux';
 import App from './App';
 import './index.scss';
 import {BrowserRouter} from "react-router-dom";
@@ -13,9 +12,7 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <MantineProvider withGlobalStyles>
-                {/*<Provider>*/}
-                    <App/>
-                {/*</Provider>*/}
+                <App/>
             </MantineProvider>
         </BrowserRouter>
     </React.StrictMode>
