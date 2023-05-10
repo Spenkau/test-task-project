@@ -13,7 +13,7 @@ const Vacancy = ({profession, payment_from, type_of_work, town_title}) => {
                 {type_of_work}
             </p>
             <div className={styles.locationContainer}>
-                <HiOutlineLocationMarker style={{width: "20px", height: "20px", opacity: "0.4", marginRight: "12px"}} />
+                <HiOutlineLocationMarker style={{width: "20px", height: "20px", opacity: "0.4"}} />
                 <p>{town_title}</p>
             </div>
             <button className={styles.favorite}>
