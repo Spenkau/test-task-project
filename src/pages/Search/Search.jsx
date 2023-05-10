@@ -1,24 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NumberInput, Select} from "@mantine/core";
 import Vacancy from "../../components/Vacancy/Vacancy";
 import axios from "axios";
 
 // ПАГИНАЦИЯ, ФИЛЬТР, ПОИСК
 
-
 const Search = () => {
     const [vacancies, setVacancies] = useState([]);
 
-    axios.get('https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/', {
-        headers: {
-            'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-            'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
-        }
-    }).then(response => {
-        setVacancies(response.data.objects);
-    }).catch(error => {
-        console.error(error);
-    });
+    useEffect(() => {
+        axios.get('https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/', {
+            headers: {
+                'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
+                'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
+            }
+        }).then(response => {
+            setVacancies(response.data.objects);
+        }).catch(error => {
+            console.error(error);
+        });
+    }, [])
 
     console.log(vacancies)
     return (
