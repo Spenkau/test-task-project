@@ -1,8 +1,12 @@
+
+// deep-[name] - styles for DetailedVacancy.jsx
+
 .vacancy {
   position: relative;
   background-color: #FFFFFF;
   padding: 24px;
   width: 100%;
+  border-radius: 12px;
 
   .favorite {
     position: absolute;
@@ -12,9 +16,14 @@
   }
 }
 
+@mixin vacancyInfo($headerSize) {
+  font-size: $headerSize;
+}
+
 .profession {
+  @include vacancyInfo(20px);
+  width: 90%;
   font-weight: 600;
-  font-size: 20px;
   color: #5E96FC;
   margin-bottom: 12px;
 }
@@ -32,5 +41,8 @@
 
 .locationContainer {
   display: flex;
+  gap: 12px;
+  justify-content: start;
+  width: 100%;
   font-size: 16px;
 }
