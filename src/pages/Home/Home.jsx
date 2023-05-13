@@ -1,27 +1,41 @@
 import React, {useEffect, useState} from 'react';
 import {NumberInput, Select} from "@mantine/core";
 import Vacancy from "../../components/Vacancy/Vacancy";
-import axios from "axios";
+import {useGetVacanciesQuery} from "../../store/apiSlice";
+import Search from "../../components/Search/Search";
 
-// ПАГИНАЦИЯ, ФИЛЬТР, ПОИСК
-
-const Search = () => {
-    const [vacancies, setVacancies] = useState([]);
+const Home = () => {
+    const {data: vacancies, isLoading, isSuccess} = useGetVacanciesQuery();
+    const [renderJobs, setRenderJobs] = useState([])
 
     useEffect(() => {
-        axios.get('https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/', {
-            headers: {
-                'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-                'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
-            }
-        }).then(response => {
-            setVacancies(response.data.objects);
-        }).catch(error => {
-            console.error(error);
-        });
-    }, [])
+        const getRenderJobs = async () => {
+            if (vacancies) setRenderJobs(vacancies.objects)
+        }
+        getRenderJobs()
+    }, [isSuccess])
 
-    console.log(vacancies)
+    let content;
+
+    if (isLoading) {
+        content = <div>Loading...</div>
+    } else if (vacancies) {
+        content = renderJobs.map((vac, index) =>
+            <Vacancy
+                key={index}
+                profession={vac.profession}
+                firm_name={vac.firm_name}
+                type_of_work={vac.type_of_work.title}
+                payment_from={vac.payment_from}
+                payment_to={vac.payment_to}
+                town_title={vac.town.title}
+                id={vac.id}
+                renderJobs={renderJobs}
+                setRenderJobs={setRenderJobs}
+            />
+        )
+    }
+
     return (
         <>
             <main>
@@ -38,7 +52,7 @@ const Search = () => {
                             <p>Отрасль</p>
                             <Select
                                 placeholder="Выберите отсраль"
-                                rightSection={<img src="/images/Down.png" sizes="1rem"  alt=""/>}
+                                rightSection={<img src="/images/Down.png" sizes="1rem" alt=""/>}
                                 style={{width: "275px"}}
                                 data={['l']}/>
                         </li>
@@ -48,12 +62,12 @@ const Search = () => {
                                 min={0}
                                 step={5000}
                                 placeholder="От"
-                                style={{width: "275px"}} />
+                                style={{width: "275px"}}/>
                             <NumberInput
                                 min={0}
                                 step={5000}
                                 placeholder="До"
-                                style={{width: "275px", margin: "8px 0 20px 0"}} />
+                                style={{width: "275px", margin: "8px 0 20px 0"}}/>
                         </li>
                     </ul>
                     <div className="filters-bottom">
@@ -61,24 +75,9 @@ const Search = () => {
                     </div>
                 </div>
                 <div className="main-content">
-                    <form className="search" action="search">
-                        <img className="left" src="/images/loop.png" width={16} height={16} alt="loop"/>
-                        <input className="left" placeholder="Введите название вакансии" type="text"/>
-                        <button className="btn-blue">Поиск</button>
-                    </form>
+                    <Search renderJobs={renderJobs} setRenderJobs={setRenderJobs} />
                     <ul className="vacancy-list">
-                        {
-                            vacancies.map((vac, index) =>
-                                <Vacancy
-                                    key={index}
-                                    profession={vac.profession}
-                                    firm_name={vac.firm_name}
-                                    type_of_work={vac.type_of_work.title}
-                                    payment_from={vac.payment_from}
-                                    town_title={vac.town.title}
-                                />
-                            )
-                        }
+                        {content}
                     </ul>
                 </div>
             </main>
@@ -87,4 +86,4 @@ const Search = () => {
     );
 };
 
-export default Search;
+export default Home;
