@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Search from "./pages/Search/Search";
+import Home from "./pages/Home/Home";
 import Favorites from "./pages/Favorites/Favorites";
 import {Route, Routes} from 'react-router-dom'
 import Layout from "./features/Layout/Layout";
@@ -9,9 +9,9 @@ function App() {
     return (
         <Layout>
             <Routes>
-                <Route path="/" element={<Search/>}/>
+                <Route exact path="/" element={<Home/>}/>
                 <Route path="/favorites" element={<Favorites/>}/>
-                <Route path="/vacancy_details" element={<DetailedVacancy/>}/>
+                <Route path="/vacancies/:id" element={<DetailedVacancy/>}/>
             </Routes>
         </Layout>
     );
