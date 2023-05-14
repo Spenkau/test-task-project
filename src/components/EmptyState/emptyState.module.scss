@@ -1,3 +1,9 @@
+.empty_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .container {
   display: flex;
   width: 370px;
@@ -16,7 +22,11 @@
     font-size: 24px;
     color: #343A40;
   }
-  button {
+  .redirect_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
     width: 162px;
     height: 42px;
     background-color: #DEECFF;
