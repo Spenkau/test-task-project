@@ -11,10 +11,10 @@ export const apiSlice = createApi({
     }),
     endpoints: (builder) => ({
         getVacancies: builder.query({
-            query: (count = 10) => 'vacancies/?count=10',
+            query: (count = 10) => 'vacancies',
         }),
         getVacanciesByKeyword: builder.query({
-            query: (keyword) => `vacancies/?count=10&keyword=${keyword}`
+            query: (keyword) => `vacancies/?keyword=${keyword}`
         }),
         getVacancy: builder.query({
             query: (id) => `vacancies/${id}`
