@@ -1,45 +1,65 @@
 import React, {useEffect, useState} from 'react';
-import {NumberInput, Select} from "@mantine/core";
+import {NumberInput, Pagination, Select} from "@mantine/core";
 import Vacancy from "../../components/Vacancy/Vacancy";
 import {useGetVacanciesQuery} from "../../store/apiSlice";
 import Search from "../../components/Search/Search";
+import {usePagination} from "@mantine/hooks";
 
 const Home = () => {
-    const {data: vacancies, isLoading, isSuccess} = useGetVacanciesQuery();
+    const {data: vacancies, isSuccess} = useGetVacanciesQuery();
     const [renderJobs, setRenderJobs] = useState([])
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    const [currentPageState, setCurrentPageState] = useState(1);
+    const ITEMS_PER_PAGE = 4;
+    const { from, to, currentPage, pagesCount, setPage } = usePagination({
+        perPage: ITEMS_PER_PAGE,
+        page: currentPageState,
+        withControls: true
+    });
+    const paginatedItems = renderJobs.slice(from, to);
 
     useEffect(() => {
         const getRenderJobs = async () => {
-            if (vacancies) setRenderJobs(vacancies.objects)
+            if (vacancies) {
+                setRenderJobs(vacancies.objects)
+                setIsLoaded(true)
+            }
         }
         getRenderJobs()
     }, [isSuccess])
 
-    let content;
-
-    if (isLoading) {
+    let content, pages;
+    if (isLoaded === false) {
         content = <div>Loading...</div>
-    } else if (vacancies) {
-        content = renderJobs.map((vac, index) =>
-            <Vacancy
-                key={index}
-                profession={vac.profession}
-                firm_name={vac.firm_name}
-                type_of_work={vac.type_of_work.title}
-                payment_from={vac.payment_from}
-                payment_to={vac.payment_to}
-                town_title={vac.town.title}
-                id={vac.id}
-                renderJobs={renderJobs}
-                setRenderJobs={setRenderJobs}
-            />
-        )
+    } else {
+        content = paginatedItems.map(vac =>
+                <Vacancy
+                    key={vac.id}
+                    profession={vac.profession}
+                    firm_name={vac.firm_name}
+                    type_of_work={vac.type_of_work.title}
+                    payment_from={vac.payment_from}
+                    payment_to={vac.payment_to}
+                    town_title={vac.town.title}
+                    id={vac.id}
+                />
+            )
+        pages = <Pagination
+                    id="pagination"
+                    pagesCount={pagesCount}
+                    currentPage={currentPageState}
+                    onChange={(page) => {
+                        setPage(page);
+                        setCurrentPageState(page);
+                    }}
+                />
     }
 
     return (
         <>
             <main>
-                <div className="filter-content" /**action="filter"**/>
+                <section className="filter-content" /**action="filter"**/>
                     <div className="filters-top">
                         <h2>Фильтры</h2>
                         <button className="filters-reset">
@@ -73,13 +93,14 @@ const Home = () => {
                     <div className="filters-bottom">
                         <button className="btn-blue">Применить</button>
                     </div>
-                </div>
-                <div className="main-content">
-                    <Search renderJobs={renderJobs} setRenderJobs={setRenderJobs} />
+                </section>
+                <section className="main-content">
+                    <Search setRenderJobs={setRenderJobs} isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
                     <ul className="vacancy-list">
                         {content}
+                        {pages}
                     </ul>
-                </div>
+                </section>
             </main>
             <footer></footer>
         </>

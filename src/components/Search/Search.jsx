@@ -1,20 +1,25 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useGetVacanciesByKeywordQuery} from "../../store/apiSlice";
 
-const Search = ({setRenderJobs}) => {
+const Search = ({setRenderJobs, setIsLoaded}) => {
     const [keyword, setKeyword] = useState('');
     const [shouldFetch, setShouldFetch] = useState(false)
     const searchInputRef = useRef(null);
-    const {data: vacanciesByKeyword} = useGetVacanciesByKeywordQuery(keyword, {
+    const {data: vacanciesByKeyword, isSuccess} = useGetVacanciesByKeywordQuery(keyword, {
         skip: shouldFetch === false
     });
 
     useEffect(() => {
         if (vacanciesByKeyword) setRenderJobs(vacanciesByKeyword.objects)
+
+        if (isSuccess) setIsLoaded(true)
+
     }, [vacanciesByKeyword])
 
     const getVacanciesByKeyword = async (e) => {
         e.preventDefault();
+        setIsLoaded(false)
+
         setKeyword(searchInputRef.current.value);
         setShouldFetch(true);
         searchInputRef.current.value = '';
