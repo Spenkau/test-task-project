@@ -1,8 +1,12 @@
 import React from 'react';
 import styles from './layout.module.scss';
 import {NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {selectFavorites} from "../../store/favoritesSlice";
 
 function Layout(props) {
+    const favorites = useSelector(selectFavorites);
+
     return (
         <>
             <header>
@@ -18,9 +22,7 @@ function Layout(props) {
                                 className={styles.customLink}>Поиск вакансий</NavLink>
                         </li>
                         <li>
-                            <NavLink
-                                to="/favorites"
-                                className={styles.customLink}>Избранное</NavLink>
+                            <NavLink to={favorites.length !== 0 ? "/favorites" : "/empty_page"} className={styles.customLink}>Избранное</NavLink>
                         </li>
                     </ul>
                 </nav>
