@@ -19,7 +19,7 @@ li { list-style-type: none }
 
 main {
   display: flex;
-  height: auto;
+  height: calc(100vh - 84px);
   background-color: #F7F7F8;
   padding: 40px 162px 0 162px;
 }
@@ -29,6 +29,13 @@ main {
   color: white;
   border-radius: 8px;
   align-self: stretch;
+
+  &:hover {
+    background-color: #92C1FF;
+  }
+  &:active {
+    background-color: #5E96FC;
+  }
 }
 
 .filter-content {
@@ -57,11 +64,19 @@ main {
   display: flex;
   align-items: center;
   background-color: transparent;
+  color: #ACADB9;
+
   span {
     font-weight: 500;
     font-size: 14px;
-    color: #ACADB9;
     margin: 4px;
+  }
+
+  &:hover {
+    color: #92C1FF;
+  }
+  &:active {
+    color: #5E96FC;
   }
 }
 
@@ -140,6 +155,20 @@ main {
     right: 24px;
     top: 24px;
     background-color: transparent;
+
+    img {
+      width: 24px;
+      height: 22px;
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+
+      &:hover {
+        fill: #5E96FC;
+      }
+    }
+
   }
 }
 
