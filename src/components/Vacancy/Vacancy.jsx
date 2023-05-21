@@ -4,13 +4,14 @@ import {useNavigate} from 'react-router'
 import {useLocation} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {interactWithFavorite} from "../../store/favoritesSlice";
+import {CiStar} from "react-icons/ci";
 
-const Vacancy = (props) => {
-    const {profession, payment_from, payment_to, type_of_work, town_title, id} = props;
+const Vacancy = ({profession, payment_from, payment_to, type_of_work, town_title, id, favorited}) => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
+
     const dispatch = useDispatch();
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(favorited);
 
     const redirectToDetails = () => {
         if (pathname.startsWith('/vacancies')) return;
@@ -19,11 +20,11 @@ const Vacancy = (props) => {
 
     const handleFavorite = () => {
         setIsFavorite(!isFavorite)
-        dispatch(interactWithFavorite({...props, isFavorite}))
+        dispatch(interactWithFavorite({profession, payment_from, payment_to, type_of_work, town_title, id, isFavorite}))
     }
 
     return (
-        <li className="vacancy">
+        <li className="vacancy" data-elem={"vacancy-" + id}>
             <p className="profession" onClick={redirectToDetails}>{profession}</p>
             <p className="extraInfo">
                 <span>з/п {
@@ -44,8 +45,8 @@ const Vacancy = (props) => {
                 <HiOutlineLocationMarker style={{width: "20px", height: "20px", opacity: "0.4"}}/>
                 <p>{town_title}</p>
             </div>
-            <button className="favorite" onClick={handleFavorite}>
-                { isFavorite ? <img src="/images/favorite.png" alt="favorite"/>: <img src="/images/nonfavorite.png" alt="not favorite"/> }
+            <button className="favorite" onClick={handleFavorite} data-elem={"vacancy-" + id + "-shortlist-button"}>
+                { (isFavorite) ? <img src="/images/favorite.png" alt="non favorite" /> : <CiStar /> }
             </button>
         </li>
     );
