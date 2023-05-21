@@ -15,11 +15,13 @@ header {
   margin-left: 162px;
 }
 
-li { list-style-type: none }
+li {
+  list-style-type: none
+}
 
 main {
   display: flex;
-  height: calc(100vh - 84px);
+  min-height: calc(100vh - 84px);
   background-color: #F7F7F8;
   padding: 40px 162px 0 162px;
 }
@@ -33,6 +35,7 @@ main {
   &:hover {
     background-color: #92C1FF;
   }
+
   &:active {
     background-color: #5E96FC;
   }
@@ -52,7 +55,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom:  32px;
+  margin-bottom: 32px;
+
   h2 {
     font-weight: 700;
     font-size: 20px;
@@ -60,6 +64,7 @@ main {
     color: #232134;
   }
 }
+
 .filters-reset {
   display: flex;
   align-items: center;
@@ -75,6 +80,7 @@ main {
   &:hover {
     color: #92C1FF;
   }
+
   &:active {
     color: #5E96FC;
   }
@@ -86,9 +92,19 @@ main {
     font-size: 16px;
     margin-bottom: 8px;
   }
+
   .industry {
     margin-bottom: 20px;
   }
+}
+
+.work-branch, .input-from, .input-to {
+  width: 275px;
+}
+
+.input-to {
+  width: 275px;
+  margin: 8px 0 20px 0;
 }
 
 .filters-bottom {
@@ -100,7 +116,7 @@ main {
 
 .main-content {
   width: 100%;
-  //height: 90vh;
+  height: 732px;
 }
 
 .search {
@@ -109,6 +125,7 @@ main {
   width: 100%;
   height: 48px;
   padding: 8px 12px;
+  border-radius: 8px;
   background-color: #FFFFFF;
   margin-bottom: 16px;
 
@@ -123,6 +140,7 @@ main {
     color: #ACADB9;
     background-color: transparent;
   }
+
   button {
     padding: 4px 20px;
     font-size: 14px;
@@ -132,11 +150,14 @@ main {
 }
 
 .vacancy-list, .favorites {
-  width: 100%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  width: 100%;
   gap: 16px;
+}
+
+.vacancy-list {
+  justify-content: center;
 }
 
 .active {
@@ -160,6 +181,7 @@ main {
       width: 24px;
       height: 22px;
     }
+
     svg {
       width: 24px;
       height: 24px;
@@ -187,6 +209,8 @@ main {
 
 .profession {
   display: inline-block;
+  height: 24px;
+  width: 90%;
   @include headerStyles(20px, #5E96FC, 600);
   margin-bottom: 12px;
 }
@@ -210,6 +234,7 @@ main {
 
 .details {
   width: 100%;
+
   .profession {
     @include headerStyles(28px, #232134, 700)
   }
@@ -229,6 +254,7 @@ main {
     margin-top: 20px;
     padding: 24px;
     overflow-wrap: break-word;
+
     div {
       line-height: 140%;
       color: #232134;
@@ -238,5 +264,221 @@ main {
 
 #pagination {
   display: flex;
-  margin: 24px auto 0 auto;
+  margin: 0 auto;
+}
+
+#loader {
+  margin: 300px auto 0 auto;
+}
+
+@media screen and (max-width: 1385px) {
+  main {
+    padding: 40px 100px 0 100px;
+  }
+}
+
+@media screen and (max-width: 985px) {
+  main {
+    padding: 40px 20px 0 20px;
+  }
+
+  .filter-content {
+    width: 300px;
+    height: 315px;
+    padding: 15px;
+
+    h2, p {
+      font-size: 16px;
+    }
+
+    .filters-reset {
+      span {
+        font-size: 12px;
+      }
+    }
+
+    .filters-bottom {
+      height: 20px;
+    }
+  }
+  .filters-top {
+    margin-bottom: 15px;
+  }
+  .filters-center {
+    .industry {
+      margin-bottom: 10px;
+    }
+  }
+  .work-branch {
+    width: 100%;
+  }
+  .input-from {
+    width: 100%;
+  }
+  .input-to {
+    width: 100%;
+  }
+
+  .vacancy {
+    padding: 30px;
+  }
+
+
+  .search input {
+    font-size: 12px;
+  }
+
+  .profession {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .extraInfo {
+    font-size: 13px;
+    margin: 10px 0;
+
+    span {
+      font-size: 13px;
+    }
+  }
+  .locationContainer {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 985px) {
+  .profession {
+    font-size: 15px;
+  }
+  .vacancy {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 752px) {
+  main {
+    padding: 40px 10px;
+  }
+
+  .filter-content {
+    margin-right: 15px;
+  }
+
+  .filters-top {
+    display: block;
+    .filters-reset {
+      margin-top: 5px;
+
+      span {
+        margin: 0
+      }
+
+      svg {
+        margin: auto 0 auto 5px
+      }
+    }
+  }
+  header {
+    margin-left: 40px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+
+  header {
+    margin-left: 10px;
+  }
+
+  .profession {
+    font-size: 14px;
+    width: 80%;
+  }
+
+  .extraInfo {
+    font-size: 11px;
+
+    span {
+      font-size: 11px;
+      width: 100%;
+    }
+  }
+  .locationContainer {
+    font-size: 11px;
+
+    p {
+      display: flex;
+      margin: auto 0;
+    }
+
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  .filter-content {
+    margin-right: 15px;
+    .filters-reset {
+      span {
+        font-size: 11px
+      }
+    }
+  }
+
+  .filters-top {
+    h2 {
+      font-size: 14px
+    }
+  }
+
+  .search {
+    padding: 4px 8px;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+    }
+  }
+}
+
+.show-filters {
+  //display: none;
+}
+
+@media screen and (max-width: 504px) {
+  main {
+    flex-direction: column;
+    padding: 20px 10px 20px 10px;
+  }
+//.filter-content {
+//  display: none;
+//}
+
+  .filter-content {
+    width: 100%;
+    height: 180px;
+    margin-bottom: 10px;
+    padding: 8px;
+    .filters-top {
+      display: flex;
+      margin-bottom: 8px;
+    }
+    .filters-center {
+      display: flex;
+      gap: 10px;
+      height: 109px;
+      p {
+        font-size: 12px;
+      }
+    }
+    .filters-bottom {
+      height: 30px;
+    }
+    .btn-blue {
+      height: 100%;
+    }
+  }
+
 }
