@@ -1,29 +1,38 @@
 import React, {useEffect, useState} from 'react';
-import {NumberInput, Pagination, Select} from "@mantine/core";
+import {Loader, Pagination} from "@mantine/core";
 import Vacancy from "../../components/Vacancy/Vacancy";
 import {useGetVacanciesQuery} from "../../store/apiSlice";
 import Search from "../../components/Search/Search";
 import {usePagination} from "@mantine/hooks";
+import Filters from "../../components/Filters/Filters";
+import {useSelector} from "react-redux";
+import {selectFavorites} from "../../store/favoritesSlice";
 
 const Home = () => {
     const {data: vacancies, isSuccess} = useGetVacanciesQuery();
     const [renderJobs, setRenderJobs] = useState([])
-    const [isLoaded, setIsLoaded] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false);
 
-    const [currentPageState, setCurrentPageState] = useState(1);
+    const favorites = useSelector(selectFavorites)
+
+    const [total, setTotal] = useState(1);
     const ITEMS_PER_PAGE = 4;
-    const { from, to, currentPage, pagesCount, setPage } = usePagination({
-        perPage: ITEMS_PER_PAGE,
-        page: currentPageState,
-        withControls: true
-    });
-    const paginatedItems = renderJobs.slice(from, to);
+    const {active} = usePagination({
+        initialPage: 1,
+        page: total,
+        total: renderJobs.length / ITEMS_PER_PAGE
+    })
+
+    const startIndex = (total - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+
+    const displayedVacancies = renderJobs.slice(startIndex, endIndex)
 
     useEffect(() => {
         const getRenderJobs = async () => {
             if (vacancies) {
-                setRenderJobs(vacancies.objects)
-                setIsLoaded(true)
+                setRenderJobs(vacancies.objects);
+                setIsLoaded(true);
             }
         }
         getRenderJobs()
@@ -31,78 +40,48 @@ const Home = () => {
 
     let content, pages;
     if (isLoaded === false) {
-        content = <div>Loading...</div>
+        content = <Loader id="loader" variant="dots"/>
     } else {
-        content = paginatedItems.map(vac =>
-                <Vacancy
-                    key={vac.id}
-                    profession={vac.profession}
-                    firm_name={vac.firm_name}
-                    type_of_work={vac.type_of_work.title}
-                    payment_from={vac.payment_from}
-                    payment_to={vac.payment_to}
-                    town_title={vac.town.title}
-                    id={vac.id}
-                />
-            )
+        content = displayedVacancies.map(vac =>
+            <Vacancy
+                key={vac.id}
+                profession={vac.profession}
+                firm_name={vac.firm_name}
+                type_of_work={vac.type_of_work.title}
+                payment_from={vac.payment_from}
+                payment_to={vac.payment_to}
+                town_title={vac.town.title}
+                id={vac.id}
+                favorited={favorites.some(item => vac.id === item.id)}
+            />
+        )
+
         pages = <Pagination
-                    id="pagination"
-                    pagesCount={pagesCount}
-                    currentPage={currentPageState}
-                    onChange={(page) => {
-                        setPage(page);
-                        setCurrentPageState(page);
-                    }}
-                />
+            id="pagination"
+            value={active}
+            total={Math.ceil(renderJobs.length / 5)}
+            onChange={page => setTotal(page)}
+            position={"center"}
+        />
     }
 
     return (
         <>
             <main>
-                <section className="filter-content" /**action="filter"**/>
-                    <div className="filters-top">
-                        <h2>Фильтры</h2>
-                        <button className="filters-reset">
-                            <span>Сбросить все</span>
-                            <img src="/images/cross-symbol.png" alt=""/>
-                        </button>
-                    </div>
-                    <ul className="filters-center">
-                        <li className="industry">
-                            <p>Отрасль</p>
-                            <Select
-                                placeholder="Выберите отсраль"
-                                rightSection={<img src="/images/Down.png" sizes="1rem" alt=""/>}
-                                style={{width: "275px"}}
-                                data={['l']}/>
-                        </li>
-                        <li className="salary">
-                            <p>Оклад</p>
-                            <NumberInput
-                                min={0}
-                                step={5000}
-                                placeholder="От"
-                                style={{width: "275px"}}/>
-                            <NumberInput
-                                min={0}
-                                step={5000}
-                                placeholder="До"
-                                style={{width: "275px", margin: "8px 0 20px 0"}}/>
-                        </li>
-                    </ul>
-                    <div className="filters-bottom">
-                        <button className="btn-blue">Применить</button>
-                    </div>
-                </section>
+                <Filters
+                    setRenderJobs={setRenderJobs}
+                    setIsLoaded={setIsLoaded}/>
                 <section className="main-content">
-                    <Search setRenderJobs={setRenderJobs} isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
+                    <Search
+                        setRenderJobs={setRenderJobs}
+                        isLoaded={isLoaded}
+                        setIsLoaded={setIsLoaded}/>
                     <ul className="vacancy-list">
                         {content}
                         {pages}
                     </ul>
                 </section>
             </main>
-            <footer></footer>
         </>
     );
 };
