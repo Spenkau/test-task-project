@@ -11,10 +11,16 @@ export const apiSlice = createApi({
     }),
     endpoints: (builder) => ({
         getVacancies: builder.query({
-            query: (count = 10) => 'vacancies',
+            query: () => 'vacancies',
         }),
         getVacanciesByKeyword: builder.query({
-            query: (keyword) => `vacancies/?keyword=${keyword}`
+            query: (keyword) => `vacancies/?published=1&keyword=${keyword}`
+        }),
+        getVacanciesByFilter: builder.query({
+            query: ([from= 0, to = 0, catalogues = 0]) => {
+                console.log(from, to, catalogues)
+                return `vacancies/?published=1&payment_from=${from}&payment_to=${to}&catalogues=${catalogues}`
+            }
         }),
         getVacancy: builder.query({
             query: (id) => `vacancies/${id}`
@@ -22,4 +28,4 @@ export const apiSlice = createApi({
     })
 });
 
-export const { useGetVacanciesQuery, useGetVacanciesByKeywordQuery, useGetVacancyQuery } = apiSlice;
+export const { useGetVacanciesQuery, useGetVacanciesByKeywordQuery, useGetVacancyQuery, useGetVacanciesByFilterQuery} = apiSlice;
