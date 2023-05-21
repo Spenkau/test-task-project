@@ -1,1 +1,1 @@
-Here is smth will be soon
+Test task for an intership to the company Paralect
