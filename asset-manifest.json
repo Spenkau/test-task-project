@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Spenkau/test-task-project/static/css/main.4a4a8e15.css",
+    "main.js": "/Spenkau/test-task-project/static/js/main.950763ef.js",
+    "static/media/empty.png": "/Spenkau/test-task-project/static/media/empty.d64744984ef6c396b779.png",
+    "index.html": "/Spenkau/test-task-project/index.html",
+    "main.4a4a8e15.css.map": "/Spenkau/test-task-project/static/css/main.4a4a8e15.css.map",
+    "main.950763ef.js.map": "/Spenkau/test-task-project/static/js/main.950763ef.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4a4a8e15.css",
+    "static/js/main.950763ef.js"
+  ]
+}
