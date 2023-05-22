@@ -48,7 +48,7 @@ const Filters = ({setRenderJobs, setIsLoaded}) => {
                         value={value.catalogue}
                         onChange={(val) => setValue({...value, catalogue: val})}
                         placeholder='Выберите отсраль'
-                        rightSection={<img src="/images/down.png" sizes="1rem" alt=""/>}
+                        rightSection={<div className="down_btn"  />}
                         className="work-branch"
                         data={catalogues}/>
                 </li>
@@ -58,7 +58,6 @@ const Filters = ({setRenderJobs, setIsLoaded}) => {
                         data-elem="salary-from-input"
                         min={0}
                         step={5000}
-                        // value={value.from}
                         onChange={(val) => setValue({...value, from: val})}
                         placeholder="От"
                         className="input-from"/>
@@ -66,7 +65,6 @@ const Filters = ({setRenderJobs, setIsLoaded}) => {
                         data-elem="salary-to-input"
                         min={0}
                         step={5000}
-                        // value={value.to}
                         onChange={(val) => setValue({...value, to: val})}
                         placeholder="До"
                         className="input-to"/>

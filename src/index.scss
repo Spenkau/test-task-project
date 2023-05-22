@@ -194,6 +194,15 @@ main {
   }
 }
 
+.down_btn {
+  display: flex;
+  margin: auto 0;
+  width: 20px;
+  height: 8px;
+  background-repeat: no-repeat;
+  background-image: url("../public/images/down.png");
+}
+
 @mixin headerStyles($headerSize, $headerColor, $headerWeight) {
   font-size: $headerSize;
   color: $headerColor;
@@ -443,18 +452,11 @@ main {
   }
 }
 
-.show-filters {
-  //display: none;
-}
-
 @media screen and (max-width: 504px) {
   main {
     flex-direction: column;
     padding: 20px 10px 20px 10px;
   }
-//.filter-content {
-//  display: none;
-//}
 
   .filter-content {
     width: 100%;
