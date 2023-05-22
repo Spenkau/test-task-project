@@ -15,7 +15,7 @@ const Vacancy = ({profession, payment_from, payment_to, type_of_work, town_title
 
     const redirectToDetails = () => {
         if (pathname.startsWith('/vacancies')) return;
-        navigate(`/vacancies/${id}`, {state: {profession, payment_from, payment_to, type_of_work, town_title, id}});
+        navigate(`/vacancies/${id}`, {state: {profession, payment_from, payment_to, type_of_work, town_title, id, favorited}});
     };
 
     const handleFavorite = () => {
@@ -46,7 +46,7 @@ const Vacancy = ({profession, payment_from, payment_to, type_of_work, town_title
                 <p>{town_title}</p>
             </div>
             <button className="favorite" onClick={handleFavorite} data-elem={"vacancy-" + id + "-shortlist-button"}>
-                { (isFavorite) ? <img src="/images/favorite.png" alt="non favorite" /> : <CiStar /> }
+                { (isFavorite) ? <img src="/images/favorite.png" alt="favorite" /> : <CiStar /> }
             </button>
         </li>
     );

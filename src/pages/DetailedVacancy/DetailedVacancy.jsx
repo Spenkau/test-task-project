@@ -6,7 +6,7 @@ import {useGetVacancyQuery} from "../../store/apiSlice";
 
 const DetailedVacancy = () => {
     const {state} = useLocation();
-    const {profession, payment_from, payment_to, type_of_work, town_title, id} = state;
+    const {profession, payment_from, payment_to, type_of_work, town_title, id, favorited} = state;
     const {data, isError} = useGetVacancyQuery(id)
 
     function generateRichText() {
@@ -23,7 +23,7 @@ const DetailedVacancy = () => {
     return (
         <main>
             <ul className="details">
-                <Vacancy profession={profession} payment_from={payment_from} payment_to={payment_to} type_of_work={type_of_work} town_title={town_title} />
+                <Vacancy profession={profession} payment_from={payment_from} payment_to={payment_to} type_of_work={type_of_work} town_title={town_title} favorited={favorited}/>
                 <li className="details-content">
                     {generateRichText()}
                 </li>

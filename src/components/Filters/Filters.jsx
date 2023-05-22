@@ -48,7 +48,7 @@ const Filters = ({setRenderJobs, setIsLoaded}) => {
                         value={value.catalogue}
                         onChange={(val) => setValue({...value, catalogue: val})}
                         placeholder='Выберите отсраль'
-                        rightSection={<img src="/images/Down.png" sizes="1rem" alt=""/>}
+                        rightSection={<img src="/images/down.png" sizes="1rem" alt=""/>}
                         className="work-branch"
                         data={catalogues}/>
                 </li>
