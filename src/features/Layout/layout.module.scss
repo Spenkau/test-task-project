@@ -12,6 +12,13 @@ header {
   left: 0;
   display: flex;
 
+  .picture {
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-image: url("/../public/images/union.png");
+  }
+
   span {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;

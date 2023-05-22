@@ -5,6 +5,7 @@ import {useLocation} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {interactWithFavorite} from "../../store/favoritesSlice";
 import {CiStar} from "react-icons/ci";
+import {GiRoundStar} from "react-icons/gi";
 
 const Vacancy = ({profession, payment_from, payment_to, type_of_work, town_title, id, favorited}) => {
     const navigate = useNavigate();
@@ -46,7 +47,7 @@ const Vacancy = ({profession, payment_from, payment_to, type_of_work, town_title
                 <p>{town_title}</p>
             </div>
             <button className="favorite" onClick={handleFavorite} data-elem={"vacancy-" + id + "-shortlist-button"}>
-                { (isFavorite) ? <img src="/images/favorite.png" alt="favorite" /> : <CiStar /> }
+                { (isFavorite) ? <GiRoundStar fill='#5E96FC' /> : <CiStar /> }
             </button>
         </li>
     );

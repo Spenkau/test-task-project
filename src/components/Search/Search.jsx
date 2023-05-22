@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useGetVacanciesByKeywordQuery} from "../../store/apiSlice";
+import {CiSearch} from "react-icons/ci";
 
 const Search = ({setRenderJobs, setIsLoaded}) => {
     const [keyword, setKeyword] = useState('');
@@ -30,7 +31,7 @@ const Search = ({setRenderJobs, setIsLoaded}) => {
 
     return (
         <form className="search" onSubmit={(e) => getVacanciesByKeyword(e)}>
-            <img className="left" src="/images/loop.png" width={16} height={16} alt="loop"/>
+            <CiSearch width={16} height={16}/>
             <input
                 ref={searchInputRef}
                 className="left"
